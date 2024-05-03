@@ -1,0 +1,1 @@
+# Let's create another Express.js project. This time, we'll build a basic CRUD (Create, Read, Update, Delete) API for managing books.
