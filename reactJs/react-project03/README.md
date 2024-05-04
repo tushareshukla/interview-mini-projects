@@ -1,8 +1,8 @@
-# React + Vite
+# Use of useContext with example creating real life scenerio where use context is used to pass data from one component to another.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+useContext is a React hook that allows functional components to consume context that has been created by the React.createContext API. Context provides a way to pass data through the component tree without having to pass props manually at every level.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Here's a real-life use case of useContext:
+
+Scenario: Imagine you're building a multi-language website, and you want to provide a way for components to access the current selected language throughout your application without passing it down as a prop to every component.
