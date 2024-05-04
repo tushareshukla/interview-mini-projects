@@ -1,3 +1,5 @@
+import Button from "./component/Button"
+import { ThemeContextProvider } from "./context/ThemeContext"
 
 
 
@@ -6,7 +8,9 @@ function App() {
 
   return (
   <>
-  Tushar is the King
+   <ThemeContextProvider>
+      <Button />
+   </ThemeContextProvider>
   </>
   )
 }
