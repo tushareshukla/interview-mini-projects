@@ -1,82 +1,64 @@
-import React from "react";
-import { useEffect, useState } from "react";
-export default function Todo() {
-  const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+import React, { useState, useEffect } from 'react';
 
+const TodoApp = () => {
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState('');
+  
   useEffect(() => {
-    const savedTodos = localStorage.getItem("todos");
+    const savedTodos = localStorage.getItem('todos');
     if (savedTodos) {
       setTodos(JSON.parse(savedTodos));
     }
-  }, []); // load todos from local storage when compoent mounts
-
+  }, []); // Load todos from local storage when the component mounts
+  
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]); // save todos to local storage when todos change
-
-  const handleTodo = () => {
-    if (newTodo.trim() !== " ") {
-      setTodos([
-        ...todos,
-        {
-          id: todos.length + 1,
-          text: newTodo,
-          completed: false,
-        },
-      ]);
-      setNewTodo("");
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]); // Save todos to local storage whenever the todos state changes
+  
+  const handleAddTodo = () => {
+    if (newTodo.trim() !== '') {
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+      setNewTodo('');
     }
   };
-  const handleTodoToggle = (id) => {
-    setTodos(
-      todos.map((todos) => {
-        if (todos.id === id) {
-          return {
-            ...todos,
-            completed: !todos.completed,
-          };
-        }
-        return todos;
-      })
-    );
+  
+  const handleToggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
+  
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+  
   return (
-    <>
-      <h1>Todo list</h1>
+    <div>
+      <h1>Todo List</h1>
       <input
         type="text"
-        placeholder="Add a todo"
+        placeholder="Enter new todo"
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={handleTodo}>Add Todo</button>
+      <button onClick={handleAddTodo}>Add Todo</button>
       <ul>
-        {todos.map((todo) => { 
-            return(
-                <li key={todo.id}>
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => {
-                    handleTodoToggle(todo.id);
-                  }}
-                />
-                <span
-                  style={{
-                    textDecoration: todo.completed ? "line-through" : "none",
-                  }}
-                >
-                  {todo.text}
-                </span>
-    
-                <button
-                 onClick={ ()=> handleDelete(todo.id)}> nikal </button>
-              </li>
-            )
-         
-        })}
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => handleToggleTodo(todo.id)}
+            />
+            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+              {todo.text}
+            </span>
+            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
       </ul>
-    </>
+    </div>
   );
-}
+};
+
+export default TodoApp;
