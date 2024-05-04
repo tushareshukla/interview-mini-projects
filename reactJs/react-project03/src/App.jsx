@@ -1,16 +1,17 @@
-import { useState } from 'react'
 
-
-import './App.css'
+import "./App.css";
+import Navbar from "./component/Navbar";
+import { LanguageProvider } from "./context/LanguageContext";
 
 function App() {
 
-
   return (
-  <>
-  <h1>Project 3</h1>
-  </>
-  )
+    <>
+     <LanguageProvider>
+     <Navbar />
+     </LanguageProvider>
+    </>
+  );
 }
 
-export default App
+export default App;
