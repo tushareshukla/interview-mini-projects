@@ -82,6 +82,20 @@ app.patch("/todo/:id", gettodo, async(req, res) => {
   
 });
 
+
+
+// delete todo
+// Delete a todo item
+app.delete('/todos/:id', getTodo, async (req, res) => {
+    try {
+      await res.todo.remove();
+      res.json({ message: 'Todo item deleted' });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
+
 // middleware function to get todo
 async function gettodo(req, res, next) {
   let todo;
