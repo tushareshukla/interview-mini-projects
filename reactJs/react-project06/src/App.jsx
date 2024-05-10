@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ParentComponent from "./components/ParentComponent";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-  <>
-  </>
-  )
+    <>
+     <h1> Ky hall hai bhai</h1>
+      <ParentComponent />
+    </>
+  );
 }
 
-export default App
+export default App;
